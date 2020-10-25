@@ -1,0 +1,26 @@
+version: "3.4"
+
+services:
+  frontend:
+    image: frontend
+    build: ./frontend
+    ports:
+      - 3000:3000
+    volumes:
+      - frontend-node-modules:/usr/src/app/node_modules
+    env_file:
+      - ./frontend/.env
+
+  nginx:
+    image: nginx
+    build: ./nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - certbot:/etc/letsencrypt
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+
+volumes:
+  frontend-node-modules:
+  certbot:

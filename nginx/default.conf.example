@@ -1,0 +1,29 @@
+server {
+    listen 80;
+    server_name example.org;
+
+    if ($host = example.org) {
+        return 301 https://$host$request_uri;
+        } # managed by Certbot
+
+        location /.well-known/acme-challenge/ {
+            root /var/www/certbot;
+        }
+    }
+
+    server {
+        listen 443;
+        listen [::]:443;
+        server_name example.org;
+
+        include /etc/letsencrypt/options-ssl-nginx.conf;
+        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+        location / {
+            proxy_pass http://frontend:3000;
+        }
+
+        location ~ /\.ht {
+            deny all;
+        }
+    }

@@ -49,7 +49,7 @@ Otherwise, in a terminal:
    <i>certbot</i>
 </pre>
 
-## 4. Navigate to your website
+## 4. Navigate to Your Website
 <pre>
 1. Visit your website in a web browser and notice the secure connection 
 </pre>
